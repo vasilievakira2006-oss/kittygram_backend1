@@ -1,0 +1,10 @@
+db.sqlite3
+env/
+env311/
+__pycache__/
+*.pyc
+*.pyo
+media/
+.git/
+.gitignore
+README.md

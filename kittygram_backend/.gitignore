@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-.env
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -135,4 +132,3 @@ dmypy.json
 
 media/
 .media
->>>>>>> 63936d2a0cbd2d7b88c9fb786e3addf00d9e465f
