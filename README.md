@@ -1,51 +1,41 @@
-### Как запустить проект:
+# Kittygram
 
-Клонировать репозиторий и перейти в него в командной строке:
+Социальная сеть для публикации фотографий котиков и их достижений.
 
-```
-git clone https://github.com/yandex-praktikum/kittygram_backend.git
-```
+## Стек технологий
 
-```
-cd kittygram_backend
-```
+- Python 3.11, Django 5.2, Django REST Framework
+- React
+- Nginx, Gunicorn
+- Docker, Docker Compose
 
-Cоздать и активировать виртуальное окружение:
+## Запуск проекта
 
-```
-python3 -m venv env
-```
-
-* Если у вас Linux/macOS
-
-    ```
-    source env/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source env/scripts/activate
-    ```
-
-```
-python3 -m pip install --upgrade pip
+### 1. Клонировать репозиторий
+```bash
+git clone https://github.com/vasilievakira2006-oss/kittygram_backend1.git
+cd kittygram_backend1
 ```
 
-Установить зависимости из файла requirements.txt:
+### 2. Создать `.env`
+```bash
+cp .env.example .env
+```
+Заполнить `.env`:
+### 3. Запустить
+```bash
+docker compose up -d --build
+docker compose exec backend python manage.py migrate
+```
 
-```
-pip install -r requirements.txt
-```
+### 4. Открыть в браузере
 
-Выполнить миграции:
+| Адрес | Описание |
+|---|---|
+| http://localhost | Сайт |
+| http://localhost/admin/ | Админка |
+| http://localhost/api/ | API |
 
-```
-python3 manage.py migrate
-```
+## Автор
 
-Запустить проект:
-
-```
-python3 manage.py runserver
-```
+[Кира Васильева](https://github.com/vasilievakira2006-oss)
