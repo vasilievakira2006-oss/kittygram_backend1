@@ -1,12 +1,8 @@
 import base64
-
 from django.core.files.base import ContentFile
 from rest_framework import serializers
 import webcolors
-
-
 import datetime as dt
-
 from .models import Achievement, AchievementCat, Cat
 
 
@@ -23,7 +19,6 @@ class Hex2NameColor(serializers.Field):
 
 class AchievementSerializer(serializers.ModelSerializer):
     achievement_name = serializers.CharField(source='name')
-
     class Meta:
         model = Achievement
         fields = ('id', 'achievement_name')
@@ -34,9 +29,7 @@ class Base64ImageField(serializers.ImageField):
         if isinstance(data, str) and data.startswith('data:image'):
             format, imgstr = data.split(';base64,')
             ext = format.split('/')[-1]
-
             data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
-
         return super().to_internal_value(data)
 
 
@@ -56,6 +49,14 @@ class CatSerializer(serializers.ModelSerializer):
 
     def get_age(self, obj):
         return dt.datetime.now().year - obj.birth_year
+
+    def validate_birth_year(self, value):
+        current_year = dt.datetime.now().year
+        if value > current_year:
+            raise serializers.ValidationError(
+                f'Год рождения не может быть больше текущего ({current_year}).'
+            )
+        return value
     
     def create(self, validated_data):
         if 'achievements' not in self.initial_data:
@@ -89,6 +90,5 @@ class CatSerializer(serializers.ModelSerializer):
                     )
                 lst.append(current_achievement)
             instance.achievements.set(lst)
-
         instance.save()
         return instance
